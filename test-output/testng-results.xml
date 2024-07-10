@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2024-07-10T13:08:49 EDT" name="Default suite" finished-at="2024-07-10T13:08:49 EDT" duration-ms="46">
+    <groups>
+    </groups>
+    <test started-at="2024-07-10T13:08:49 EDT" name="Default test" finished-at="2024-07-10T13:08:49 EDT" duration-ms="46">
+      <class name="diabetesData.Diabetes">
+        <test-method signature="test()[pri:0, instance:diabetesData.Diabetes@72d1ad2e]" started-at="2024-07-10T13:08:49 EDT" name="test" finished-at="2024-07-10T13:08:49 EDT" duration-ms="7" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- test -->
+      </class> <!-- diabetesData.Diabetes -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
