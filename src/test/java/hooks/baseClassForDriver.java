@@ -3,49 +3,47 @@ package hooks;
 import java.time.Duration;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.safari.SafariDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 
 public class baseClassForDriver {
-static WebDriver driver; 
+	public WebDriver driver;
+	public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<>();
 	
-	public WebDriver initDriver(String browser) { 
-		
-		if (browser.equalsIgnoreCase("firefox")) {
-			driver =WebDriverManager.firefoxdriver().create();
+	public WebDriver init_driver(String browser) {
+		//System.out.println("Browser Value is :"+browser);
+		if(browser.equals("chrome")) {
 			
-
-		} else if (browser.equalsIgnoreCase("chrome")) {
-			driver=WebDriverManager.chromedriver().create();
-		
-
-		} else if (browser.equalsIgnoreCase("safari")) {
-			driver = WebDriverManager.safaridriver().create();
-			
-
-		} else if (browser.equalsIgnoreCase("edge")) {
-			driver=WebDriverManager.edgedriver().create();
-			
-	
+			WebDriverManager.chromedriver().setup();
+			tlDriver.set(new ChromeDriver());
 		}
-		// Set Page load timeout
-		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		else if(browser.equals("firefox")) {
+			WebDriverManager.firefoxdriver().setup();
+			tlDriver.set(new FirefoxDriver());
+		}
+		else if(browser.equals("safari")) {	
+			tlDriver.set(new SafariDriver());
+			
+		}
+		else if(browser.equals("edge")) {	
+			tlDriver.set(new EdgeDriver());
+			
+		}		else {
+			System.out.println("please pass the correct browser value:"+ browser);
+		}
+		getDriver().manage().deleteAllCookies();
+		getDriver().manage().window().maximize();
+		return getDriver();
 		
-		driver.manage().window().maximize();
-		
-
-		return driver;
 	}
-
-	public static WebDriver getdriver() {
-		return driver;
-	}
-
-	public void closeallDriver() {
-		driver.close();
-	}
+		public static synchronized WebDriver getDriver() {
+			return tlDriver.get();
+		}
 }
 
 
