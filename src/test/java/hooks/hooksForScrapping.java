@@ -70,28 +70,6 @@ public class hooksForScrapping extends baseClassForDriver {
 		  
 		  }
 		 
-=======
-	private WebDriver driver;
-	private configReader configReader;
-	Properties prop;
-	
-	@BeforeClass 
-	public void getProperty() {
-	  configReader = new configReader(); 
-	  prop = configReader.init_prop(); 
-	  }
-	  
-	  @BeforeClass 
-	  public void launchBrowser() { 
-		  String browserName = prop.getProperty("browser"); 
-		  bs = new baseClassForDriver(); 
-		  driver = bs.init_driver(browserName); 
-		  }
-	 
-//	@AfterClass
-//	public void quitBrowser() {
-//		driver.quit();
-//	}
 
 
 }
