@@ -16,7 +16,7 @@ public class WriteExcel {
     public XSSFCell cell;
 
     public void setCellData(String sheetName, int rownum, int column, String data) throws IOException {
-        String path ="C:\\Users\\kollu\\eclipse-workspace\\WebScrappingProject\\src\\test\\resources\\Data\\outPutData.xlsx";
+        String path ="C:\\Users\\kollu\\git\\Scrapping_Hackathon\\WebScrappingProject\\src\\test\\resources\\Data\\outPutData.xlsx";
         File xlfile = new File(path);
         if (!xlfile.exists()) {
             workbook = new XSSFWorkbook();
