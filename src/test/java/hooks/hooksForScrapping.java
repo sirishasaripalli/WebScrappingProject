@@ -1,5 +1,6 @@
 package hooks;
 
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,11 +11,20 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
+
+import java.util.Properties;
+
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+
 import utilities.configReader;
 
 public class hooksForScrapping extends baseClassForDriver {
 	
 	private baseClassForDriver bs;
+
 	private configReader configReader;
 	public static WebDriver tlDriver;
 	Properties prop=new Properties();
@@ -60,6 +70,7 @@ public class hooksForScrapping extends baseClassForDriver {
 		  
 		  }
 		 
+
 
 }
 
