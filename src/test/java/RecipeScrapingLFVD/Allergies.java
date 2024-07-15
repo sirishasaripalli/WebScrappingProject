@@ -1,10 +1,6 @@
 package RecipeScrapingLFVD;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -17,19 +13,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import hooks.baseClassForDriver;
 import hooks.hooksForScrapping;
 import utilities.WriteExcel;
 
-public class LFV extends hooksForScrapping {
-
+public class Allergies extends hooksForScrapping {
+	
 	@Test
 	public void extractRecipe() throws InterruptedException, IOException {
-		List<String> eliminators = Arrays.asList(new String[] { "Fish","Sausage","ham","salami","bacon","milk","cheese","yogurt","butter","Ice cream","egg","prawn","Oil","olive oil",
-				"coconut oil","soybean oil","corn oil","safflower oil","sunflower oil","rapeseed oil","peanut oil","cottonseed oil","canola oil","mustard oil","cereals","tinned vegetable",
-				"bread","maida","atta","sooji","poha","cornflake","cornflour","pasta","White rice","pastry","cakes","biscuit","soy","soy milk","white miso paste","soysauce","soy curls",
-				"edamame","soy yogurt","soy nut","tofu","pies","Chip","cracker","potatoe","sugar","jaggery","glucose","fructose","corn syrup","cane solid","aspartame","cane solid","maltose","dextrose",
-				"sorbitol","mannitol","xylitol","maltodextrin","molasses","brown rice syrup","Splenda","nutra sweet","stevia","barley malt","pork","Meat","poultry" });
+		List<String> eliminators = Arrays.asList(new String[] { "Milk","Soy","Egg","Sesame","Peanuts","walnut","almond","hazelnut","pecan","cashew","pistachio","Shellfish","Seafood"});
 
 		//tlDriver.findElement(By.xpath("//div/a[text()= 'Recipe A To Z']")).click();
 		//Thread.sleep(2000);
@@ -39,7 +30,7 @@ public class LFV extends hooksForScrapping {
 //				"I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" });
 
 //		for (int k = 0; k <1 ; k++) {
-		tlDriver.navigate().to("https://www.tarladalal.com/recipes-for-vegan-recipes-vegan-diet-1010");
+		tlDriver.navigate().to("https://www.tarladalal.com/recipes-for-lebanese-vegetarian-lebanese-recipes-115");
 			int lastPage = 0;
 			try {
 				lastPage = Integer
@@ -51,7 +42,7 @@ public class LFV extends hooksForScrapping {
 			if (0 != lastPage) {
 				for (int j = 2; j <= lastPage; j++) {
 				
-					tlDriver.navigate().to("https://www.tarladalal.com/recipes-for-vegan-recipes-vegan-diet-1010"
+					tlDriver.navigate().to("https://www.tarladalal.com/recipes-for-lebanese-vegetarian-lebanese-recipes-115"
 							+ "?pageindex=" + j);
 					System.out.println("I am in page: " + j);
 					List<WebElement> recipeCardElements = tlDriver
@@ -89,7 +80,7 @@ public class LFV extends hooksForScrapping {
 							WriteExcel writeOutput = new WriteExcel();
 							// Recipe id
 							try {
-								writeOutput.setCellData("LFV", rowCounter, 0, recipeId);
+								writeOutput.setCellData("AllergiesData", rowCounter, 0, recipeId);
 							} catch (Exception e) {
 
 							}
@@ -99,7 +90,7 @@ public class LFV extends hooksForScrapping {
 								WebElement recipeTitle = tlDriver
 										.findElement(By.xpath("//span[@id= 'ctl00_cntrightpanel_lblRecipeName']"));
 								System.out.print(recipeTitle.getText());
-								writeOutput.setCellData("LFV", rowCounter, 1, recipeTitle.getText());
+								writeOutput.setCellData("AllergiesData", rowCounter, 1, recipeTitle.getText());
 								String recipeTitleDB = recipeTitle.getText();
 								
 							} catch (Exception e) {
@@ -107,27 +98,18 @@ public class LFV extends hooksForScrapping {
 							}
 							try {
 								WebElement recipeCategory = tlDriver.findElement(By.xpath(
-										"//span[@itemprop= 'description']/*[contains (text(), 'Breakfast') or contains (text(), 'lunch') or contains (text(), 'drink') or contains (text(), 'soup') or contains (text(), 'dinner') or contains (text(), 'snack')]"));
+										"//span[@itemprop= 'description']/*[contains (text(), 'Breakfast') or contains (text(), 'lunch') or contains (text(), 'drink') or contains (text(), 'snack') or contains (text(), 'dinner') or contains (text(), 'dish')]"));
 								System.out.print(recipeCategory.getText());
-								writeOutput.setCellData("LFV", rowCounter, 2, recipeCategory.getText());
+								writeOutput.setCellData("AllergiesData", rowCounter, 2, recipeCategory.getText());
 
 							} catch (Exception e) {
 
 							}
-//							try {
-//								WebElement recipeCategory = tlDriver.findElement(By.xpath(
-//										"//div[@id= 'recipe_small_steps']/*[contains (text(), 'Breakfast') or contains (text(), 'lunch') or contains (text(), 'dinner') or contains (text(), 'pickle') or contains (text(), 'snack') or contains (text(), 'soup')]"));
-//								System.out.print(recipeCategory.getText());
-//								writeOutput.setCellData("LFV", rowCounter, 2, recipeCategory.getText());
-//
-//							} catch (Exception e) {
-//
-//							}
 							try {
 								WebElement foodCategory = tlDriver
 										.findElement(By.xpath("//div[@class= 'breadcrumb']/span[5]"));
 								System.out.print(foodCategory.getText());
-								writeOutput.setCellData("LFV", rowCounter, 3, foodCategory.getText());
+								writeOutput.setCellData("AllergiesData", rowCounter, 3, foodCategory.getText());
 
 							} catch (Exception e) {
 
@@ -136,7 +118,7 @@ public class LFV extends hooksForScrapping {
 							try {
 								WebElement nameOfIngredients = tlDriver.findElement(By.xpath("//div[@id= 'rcpinglist']"));
 								System.out.print(nameOfIngredients.getText());
-								writeOutput.setCellData("LFV", rowCounter, 4, nameOfIngredients.getText());
+								writeOutput.setCellData("AllergiesData", rowCounter, 4, nameOfIngredients.getText());
 
 							} catch (Exception e) {
 
@@ -146,7 +128,7 @@ public class LFV extends hooksForScrapping {
 								WebElement preparationTime = tlDriver
 										.findElement(By.xpath("//p/time[@itemprop= 'prepTime']"));
 								System.out.print(preparationTime.getText());
-								writeOutput.setCellData("LFV", rowCounter, 5, preparationTime.getText());
+								writeOutput.setCellData("AllergiesData", rowCounter, 5, preparationTime.getText());
 
 							} catch (Exception e) {
 
@@ -155,7 +137,7 @@ public class LFV extends hooksForScrapping {
 							try {
 								WebElement cookTime = tlDriver.findElement(By.xpath("//p/time[@itemprop= 'cookTime']"));
 								System.out.print(cookTime.getText());
-								writeOutput.setCellData("LFV", rowCounter, 6, cookTime.getText());
+								writeOutput.setCellData("AllergiesData", rowCounter, 6, cookTime.getText());
 
 							} catch (Exception e) {
 
@@ -166,7 +148,7 @@ public class LFV extends hooksForScrapping {
 								WebElement tagsTags = tlDriver
 										.findElement(By.xpath("//div[@class= 'tags']"));
 								System.out.print(tagsTags.getText());
-								writeOutput.setCellData("LFV", rowCounter, 7, tagsTags.getText());
+								writeOutput.setCellData("AllergiesData", rowCounter, 7, tagsTags.getText());
 
 							} catch (Exception e) {
 
@@ -175,18 +157,17 @@ public class LFV extends hooksForScrapping {
 								WebElement numberOfServings = tlDriver
 										.findElement(By.xpath("//span[@id= 'ctl00_cntrightpanel_lblServes']"));
 								System.out.print(numberOfServings.getText());
-								writeOutput.setCellData("LFV", rowCounter, 8, numberOfServings.getText());
+								writeOutput.setCellData("AllergiesData", rowCounter, 8, numberOfServings.getText());
 
 							} catch (Exception e) {
 
 							}
 							try {
-								System.out.print("In cusineCategory");
 								WebElement cusineCategory = tlDriver
-										.findElement(By.xpath("//div[@class = 'breadcrumb']/span[5]"));
-										//.findElement(By.xpath("//span [@itemprop= 'name']/*[contains (text(), 'Indian') or contains (text(), 'South Indian') or contains (text(), 'Rajathani') or contains (text(), 'Punjabi') or contains (text(), 'Bengali') or contains (text(), 'orissa') or contains (text(), 'Gujarati') or contains (text(), 'Maharashtrian') or contains (text(), 'Andhra') or contains (text(), 'Kerala') or contains (text(), 'Goan') or contains (text(), 'Kashmiri') or contains (text(), 'Himachali') or contains (text(), 'Tamil nadu') or contains (text(), 'Karnataka') or contains (text(), 'Sindhi') or contains (text(), 'Chhattisgarhi') or contains (text(), 'Madhya pradesh') or contains (text(), 'Assamese') or contains (text(), 'Manipuri') or contains (text(), 'Tripuri') or contains (text(), 'Sikkimese') or contains (text(), 'Mizo') or contains (text(), 'Arunachali') or contains (text(), 'uttarakhand') or contains (text(), 'Haryanvi') or contains (text(), 'Awadhi') or contains (text(), 'Bihari') or contains (text(), 'Uttar pradesh') or contains (text(), 'Delhi') or contains (text(), 'North Indian')]"));
-								System.out.print("cusineCategory:" + cusineCategory.getText());
-								writeOutput.setCellData("LFV", rowCounter, 9, cusineCategory.getText());
+										//.findElement(By.xpath("//div[@class= 'tags']/a[last()]"));
+										.findElement(By.xpath("//div[@class= 'breadcrumb']/span[5]"));
+								System.out.print(cusineCategory.getText());
+								writeOutput.setCellData("AllergiesData", rowCounter, 9, cusineCategory.getText());
 
 							} catch (Exception e) {
 
@@ -195,7 +176,7 @@ public class LFV extends hooksForScrapping {
 								WebElement recipeDescription = tlDriver
 										.findElement(By.xpath("//span[@id='ctl00_cntrightpanel_lblrecipeNameH2']"));
 								System.out.print(recipeDescription.getText());
-								writeOutput.setCellData("LFV", rowCounter, 10, recipeDescription.getText());
+								writeOutput.setCellData("AllergiesData", rowCounter, 10, recipeDescription.getText());
 
 							} catch (Exception e) {
 
@@ -205,7 +186,7 @@ public class LFV extends hooksForScrapping {
 								WebElement prepMethod = tlDriver
 										.findElement(By.xpath("//div[@id= 'ctl00_cntrightpanel_pnlRcpMethod']"));
 								System.out.print(prepMethod.getText());
-								writeOutput.setCellData("LFV", rowCounter, 11, prepMethod.getText());
+								writeOutput.setCellData("AllergiesData", rowCounter, 11, prepMethod.getText());
 
 							} catch (Exception e) {
 
@@ -213,14 +194,14 @@ public class LFV extends hooksForScrapping {
 							try {
 								WebElement nutrients = tlDriver.findElement(By.xpath("//table[@id= 'rcpnutrients']"));
 								System.out.print(nutrients.getText());
-								writeOutput.setCellData("LFV", rowCounter, 12, nutrients.getText());
+								writeOutput.setCellData("AllergiesData", rowCounter, 12, nutrients.getText());
 
 							} catch (Exception e) {
 
 							}
 							try {
 								System.out.print(recipeUrl);
-								writeOutput.setCellData("LFV", rowCounter, 13, recipeUrl);
+								writeOutput.setCellData("AllergiesData", rowCounter, 13, recipeUrl);
 							} catch (Exception e) {
 
 							}
@@ -271,3 +252,5 @@ public class LFV extends hooksForScrapping {
 		return isEliminatorPresent.get();
 	}
 }
+
+
