@@ -14,7 +14,7 @@ public class WriteExcel {
     public XSSFCell cell;
 
     public void setCellData(String sheetName, int rownum, int column, String data) throws IOException {
-        String path ="/Users/gowthami/git/WebScrappingProject/test-output/Webscraping.xlsx";
+        String path ="C:\\Users\\galis\\git\\WebScrappingProject\\Scraping.xlsx";
         File xlfile = new File(path);
         if (!xlfile.exists()) {
             workbook = new XSSFWorkbook();
@@ -44,7 +44,7 @@ public class WriteExcel {
     }
     
     public void setCellAllergyData(String sheetName, int rownum, int column, String data) throws IOException {
-        String path ="/Users/gowthami/git/WebScrappingProject/test-output/AllergyData.xlsx";
+        String path ="C:\\Users\\galis\\git\\WebScrappingProject\\Allergy.xlsx";
         File xlfile = new File(path);
         if (!xlfile.exists()) {
             workbook = new XSSFWorkbook();
@@ -71,25 +71,43 @@ public class WriteExcel {
         fi.close();
         fo.close();
     }
-    	private void createHeaderRow(XSSFSheet sheet) {
-		
-	    XSSFRow headerRow = sheet.createRow(0);
-	    headerRow.createCell(0).setCellValue("RecipeID");
-	    headerRow.createCell(1).setCellValue("Recipe Name");
-	    headerRow.createCell(2).setCellValue("RecipeCategory");
-	    headerRow.createCell(3).setCellValue("foodCategory");
-	    headerRow.createCell(4).setCellValue("ingredients");
-	    headerRow.createCell(5).setCellValue("preparationTime");
-	    headerRow.createCell(6).setCellValue("cookingTime");
-	    headerRow.createCell(7).setCellValue("TAG");
-	    headerRow.createCell(8).setCellValue("NoOfServings");
-	    headerRow.createCell(9).setCellValue("Cuisine Category");
-	    headerRow.createCell(10).setCellValue("RecipeDescription");
-	    headerRow.createCell(11).setCellValue("PreparationMethod");
-	    headerRow.createCell(12).setCellValue("NutrientValue");
-	    headerRow.createCell(13).setCellValue("Recipe Url");
-	    
-	}
+    
+    
+private void createHeaderRow(XSSFSheet sheet) {
+    	
+    	String[] headers = {
+    			"RECIPE-ID", "RECIPE-NAME", "RECIPE-CATEGORY", "FOOD-CATEGORY", "INGREDIENTS",
+    			"PREPARATION-TIME", "COOKING-TIME", "TAG", "NO-OF-SERVINGS", "CUISINE-CATEGORY",
+    			"RECIPE-DESCRIPTION", "PREPARATION-METHOD", "NUTRIENT-VALUE", "RECIPE-URL"
+    		};
+    		XSSFRow headerRow = sheet.createRow(0); // Assuming ‘sheet’ is your Sheet object
+    		for (int i = 0; i < headers.length; i++) {
+    		    headerRow.createCell(i).setCellValue(headers[i]);
+    		}
+    
+    
+}
+    
+    
+//    	private void createHeaderRow(XSSFSheet sheet) {
+//		
+//	    XSSFRow headerRow = sheet.createRow(0);
+//	    headerRow.createCell(0).setCellValue("RECIPE-ID");
+//	    headerRow.createCell(1).setCellValue("RECIPE-NAME");
+//	    headerRow.createCell(2).setCellValue("RECIPE-CATEGORY");
+//	    headerRow.createCell(3).setCellValue("FOOD-CATEGORY");
+//	    headerRow.createCell(4).setCellValue("INGREDIENTS");
+//	    headerRow.createCell(5).setCellValue("PREPARATION-TIME");
+//	    headerRow.createCell(6).setCellValue("COOKING-TIME");
+//	    headerRow.createCell(7).setCellValue("TAG");
+//	    headerRow.createCell(8).setCellValue("NO-OF-SERVINGS");
+//	    headerRow.createCell(9).setCellValue("CUISINE-CATEGORY");
+//	    headerRow.createCell(10).setCellValue("RECIPE-DESCRIPTION");
+//	    headerRow.createCell(11).setCellValue("PREPARATION-METHOD");
+//	    headerRow.createCell(12).setCellValue("NUTRIENT-VALUE");
+//	    headerRow.createCell(13).setCellValue("RECIPE-URL");
+//	    
+//	}
     
     
 }
