@@ -11,6 +11,9 @@ public class WriteExcel {
 	public XSSFRow row;
 	public XSSFCell cell;
 
+
+  
+
 	public void setCellData(String sheetName, int rownum, int column, String data) throws IOException {
 		String path = "C:\\Users\\galis\\git\\WebScrappingProject\\Scraping.xlsx";
 		File xlfile = new File(path);
@@ -22,11 +25,16 @@ public class WriteExcel {
 		fi = new FileInputStream(path);
 		workbook = new XSSFWorkbook(fi);
 
+
 		if (workbook.getSheetIndex(sheetName) == -1)
 			workbook.createSheet(sheetName);
 
 		sheet = workbook.getSheet(sheetName);
 		createHeaderRow(sheet);
+
+
+
+
 
 		if (sheet.getRow(rownum) == null)
 			sheet.createRow(rownum);
@@ -69,6 +77,7 @@ public class WriteExcel {
 		fi.close();
 		fo.close();
 	}
+
 
 	private void createHeaderRow(XSSFSheet sheet) {
 
