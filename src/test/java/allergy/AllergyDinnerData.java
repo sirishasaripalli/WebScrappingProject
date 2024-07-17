@@ -1,10 +1,6 @@
 package allergy;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.openqa.selenium.*;
@@ -28,7 +24,7 @@ public class AllergyDinnerData extends hooksForScrapping {
 					.parseInt(tlDriver.findElement(By.xpath("//div/a[@class= 'respglink'][last()]")).getText());
 			System.out.println(lastPage + "is the last page");
 		} catch (Exception e) {
-			// do nothing or log exception
+
 		}
 		if (0 != lastPage) {
 			for (int j = 2; j <= lastPage; j++) {
@@ -70,7 +66,7 @@ public class AllergyDinnerData extends hooksForScrapping {
 									.findElement(By.xpath("//span[@id= 'ctl00_cntrightpanel_lblRecipeName']"));
 							System.out.print(recipeTitle.getText());
 							writeOutput.setCellAllergyData("AllergiesData", rowCounter, 1, recipeTitle.getText());
-						
+
 							WebElement recipeCategory = tlDriver.findElement(By.xpath(
 									"//span[@itemprop= 'description']/*[contains (text(), 'Breakfast') or contains (text(), 'lunch') or contains (text(), 'drink') or contains (text(), 'snack') or contains (text(), 'dinner') or contains (text(), 'dish')]"));
 							System.out.print(recipeCategory.getText());
@@ -132,22 +128,6 @@ public class AllergyDinnerData extends hooksForScrapping {
 
 					}
 
-					// Insert data to the table
-//							String sqlInsert = "INSERT INTO public.lfv(recipe_id, recipe_name, recipe_category, food_category, ingredients, preparation_time, cooking_time, tag, no_of_servings, cuisine_category, recipe_description, preparation_method, nutrient_values, recipe_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-//							
-//							  try {
-//					        		Connection conn = DriverManager.getConnection(url, user, password);
-//					        		System.out.println("DB connected");
-//					                PreparedStatement stmt = conn.prepareStatement(sqlInsert);
-//					                // Set parameters for the insert statement
-//					                // Execute the insert statement
-//					                int rowsInserted = stmt.executeUpdate();
-//					                System.out.println("Rows inserted: " + rowsInserted);
-//
-//					            } catch (SQLException e) {
-//					                e.printStackTrace();
-//					            }
-
 					rowCounter++;
 					System.out.println("rowCounter" + rowCounter);
 				}
@@ -174,8 +154,3 @@ public class AllergyDinnerData extends hooksForScrapping {
 		return isEliminatorPresent.get();
 	}
 }
-
-
-
-
-
