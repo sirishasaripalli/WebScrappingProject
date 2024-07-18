@@ -22,11 +22,7 @@ public class Allergies extends hooksForScrapping {
 	@Test
 	public void extractRecipe() throws InterruptedException, IOException {
 		List<String> allergies = Arrays.asList(new String[] { "Milk","Soy","Egg","Sesame","Peanuts","walnut","almond","hazelnut","pecan","cashew","pistachio","Shellfish","Seafood"});
-		List<String> eliminators = Arrays.asList(new String[] { "Fish","Sausage","ham","salami","bacon","milk","cheese","yogurt","butter","Ice cream","egg","prawn","Oil","olive oil",
-				"coconut oil","soybean oil","corn oil","safflower oil","sunflower oil","rapeseed oil","peanut oil","cottonseed oil","canola oil","mustard oil","cereals","tinned vegetable",
-				"bread","maida","atta","sooji","poha","cornflake","cornflour","pasta","White rice","pastry","cakes","biscuit","soy","soy milk","white miso paste","soysauce","soy curls",
-				"edamame","soy yogurt","soy nut","tofu","pies","Chip","cracker","potatoe","sugar","jaggery","glucose","fructose","corn syrup","cane solid","aspartame","cane solid","maltose","dextrose",
-				"sorbitol","mannitol","xylitol","maltodextrin","molasses","brown rice syrup","Splenda","nutra sweet","stevia","barley malt","pork","Meat","poultry" });
+		
 		
 		int rowCounter = 1;
 		// run in a loop for all recipe in a page
@@ -96,7 +92,7 @@ public class Allergies extends hooksForScrapping {
 						}
 						tlDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-						if (isEliminated(eliminators, allergies)) {
+						if (isEliminated(allergies)) {
 							
 							System.out.println(recipeUrl + " is eliminated");
 						} else {
@@ -239,23 +235,10 @@ public class Allergies extends hooksForScrapping {
 //		}
 	}
 
-	private boolean isEliminated(List<String> eliminators, List<String> allergies) {
+	private boolean isEliminated(List<String> allergies) {
 		AtomicBoolean isEliminatorPresent = new AtomicBoolean(false);
 
-		eliminators.parallelStream().forEach(eliminator -> {
-			try {
-
-				WebElement methodWebElement = tlDriver.findElement(By.xpath("//div[@id= 'rcpinglist']"));
-				//WebElement methodWebElement = tlDriver.findElement(By.xpath("//div[@id='recipe_small_steps']"));
-				String method = methodWebElement.getText();
-				if (null != method && null != eliminator && method.toLowerCase().contains(eliminator.toLowerCase())) {
-					System.out.println("Eliminated due to eliminator: " + eliminator);
-					isEliminatorPresent.set(true);
-				}
-			} catch (Exception e) {
-				System.out.print("No Such Element " + e.getLocalizedMessage());
-			}
-		});
+		
 		allergies.parallelStream().forEach(allergie -> {
 			try {
 
