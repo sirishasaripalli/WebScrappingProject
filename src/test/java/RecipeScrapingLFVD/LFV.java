@@ -26,7 +26,14 @@ public class LFV extends hooksForScrapping {
 				"bread","maida","atta","sooji","poha","cornflake","cornflour","pasta","White rice","pastry","cakes","biscuit","soy","soy milk","white miso paste","soysauce","soy curls",
 				"edamame","soy yogurt","soy nut","tofu","pies","Chip","cracker","potatoe","sugar","jaggery","glucose","fructose","corn syrup","cane solid","aspartame","cane solid","maltose","dextrose",
 				"sorbitol","mannitol","xylitol","maltodextrin","molasses","brown rice syrup","Splenda","nutra sweet","stevia","barley malt","pork","Meat","poultry" });
-
+//		writeToDatabase.insertData(0,"lfv");
+//		writeToDatabase.insertData(1,"allergies_lebenese");
+//		writeToDatabase.insertData(2,"allergies_indian_veg");
+//		writeToDatabase.insertData(3,"lchf");
+//		writeToDatabase.insertData(4,"lchf_beverage");
+//		writeToDatabase.insertData(5,"allergy_breakfast");
+//		writeToDatabase.insertData(6,"allergy_dinnerdata");
+//		writeToDatabase.insertData(7,"Lfv_AddIngredients");
 		int rowCounter = 1;
 		
 		tlDriver.navigate().to("https://www.tarladalal.com/recipes-for-vegan-recipes-vegan-diet-1010");
