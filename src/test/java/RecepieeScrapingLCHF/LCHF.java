@@ -1,4 +1,3 @@
-
 package RecepieeScrapingLCHF;
 
     import java.io.IOException;
@@ -6,8 +5,7 @@ package RecepieeScrapingLCHF;
 	import java.sql.DriverManager;
 	import java.sql.PreparedStatement;
 	import java.sql.SQLException;
-import java.time.Duration;
-import java.util.ArrayList;
+	import java.util.ArrayList;
 	import java.util.Arrays;
 	import java.util.HashMap;
 	import java.util.List;
@@ -19,7 +17,7 @@ import java.util.ArrayList;
 	import org.openqa.selenium.WebElement;
 	import org.testng.annotations.Test;
 
-	
+	import hooks.baseClassForDriver;
 	import hooks.hooksForScrapping;
 import utilities.ReadElliminationList;
 import utilities.WriteExcel;
@@ -34,9 +32,10 @@ import utilities.WriteExcel;
 					
 			
 			int rowCounter = 1;
-			
- 		
+			// run in a loop for all recipe in a page
+ 		List<String> pageBeginsWithList = Arrays.asList(new String[] { "0-9" });
 
+		for (int k = 0; k <1 ; k++) {
 		tlDriver.navigate().to("https://www.tarladalal.com/recipes-for-low-carb-veg-indian-recipes-757");
 			int lastPage = 0;
 				try {
@@ -44,7 +43,7 @@ import utilities.WriteExcel;
 							.parseInt(tlDriver.findElement(By.xpath("//div/a[@class= 'respglink'][last()]")).getText());
 					System.out.println(lastPage + "is the last page");
 				} catch (Exception e) {					
-					
+					// do nothing or log exception
 				}
 			
 			if (0 != lastPage) {
@@ -79,10 +78,11 @@ import utilities.WriteExcel;
 							String recipeId = recipeIdUrlEntry.getKey();
 							System.out.println(recipeUrl + "is the recipe URL");
 							tlDriver.navigate().to(recipeUrl);
-							tlDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+							tlDriver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 
 							if (isEliminated(eliminateList)) {
-								
+								//Exclude using the 
+								// tlDriver.navigate().to("//div/a[text()= 'Recipe A To Z']");
 							} else {
 								
 								WriteExcel writeOutput = new WriteExcel();
@@ -213,7 +213,21 @@ import utilities.WriteExcel;
 
 								}
 
-								
+								//Insert data to the table
+//								String sqlInsert = "INSERT INTO public.lfv(recipe_id, recipe_name, recipe_category, food_category, ingredients, preparation_time, cooking_time, tag, no_of_servings, cuisine_category, recipe_description, preparation_method, nutrient_values, recipe_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+//								
+//								  try {
+//						        		Connection conn = tlDriverManager.getConnection(url, user, password);
+//						        		System.out.println("DB connected");
+//						                PreparedStatement stmt = conn.prepareStatement(sqlInsert);
+//						                // Set parameters for the insert statement
+//						                // Execute the insert statement
+//						                int rowsInserted = stmt.executeUpdate();
+//						                System.out.println("Rows inserted: " + rowsInserted);
+	//
+//						            } catch (SQLException e) {
+//						                e.printStackTrace();
+//						            }
 
 								rowCounter++;
 								System.out.println("rowCounter" + rowCounter);
@@ -226,7 +240,7 @@ import utilities.WriteExcel;
 			}
 			}
 		
-
+	}
 		private boolean isEliminated(List<String> eliminateList) {
 			AtomicBoolean isEliminatorPresent = new AtomicBoolean(false);
 
